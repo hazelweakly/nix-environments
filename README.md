@@ -7,7 +7,7 @@ Simple example:
 ```nix
 {
   description = "Nix environment for development";
-  inputs.nix-template.url = "github:hazelweakly/nix";
+  inputs.nix-template.url = "github:hazelweakly/nix-environments";
 
   outputs = { nix-template, ... }: nix-template.lib.mkFlake {
     projectName = "example";
@@ -30,7 +30,7 @@ Accessing generated outputs to put into other inputs:
 ```nix
 {
   description = "Nix environment for development";
-  inputs.nix-template.url = "github:hazelweakly/nix";
+  inputs.nix-template.url = "github:hazelweakly/nix-environments";
 
   outputs = { self, nix-template, ... }: nix-template.lib.mkFlake (system:
     # This pkgs will have the result of all overlays declared below available
@@ -58,7 +58,7 @@ Inside an empty directory, run:
 
 ```sh
 git init
-nix flake template -t 'github:hazelweakly/nix#templates.<template>'
+nix flake template -t 'github:hazelweakly/nix-environments#templates.<template>'
 ```
 
 where `<template>` is one of the templates available in the nix flake.
@@ -83,7 +83,7 @@ To consume this as a private repo, you'll need to set up a personal access token
    access-tokens = github.com=$token_goes_here
    ```
 
-Test this by running the command `nix flake prefetch github:hazelweakly/nix`. It _should_ work.
+Test this by running the command `nix flake prefetch github:hazelweakly/nix-environments`. It _should_ work.
 
 ## Module organization.
 
