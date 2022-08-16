@@ -54,7 +54,23 @@ Accessing generated outputs to put into other inputs:
 
 ## How to Use
 
-To consume this, you'll need to set up a personal access token where nix can read it.
+Inside an empty directory, run:
+
+```sh
+git init
+nix flake template -t 'github:hazelweakly/nix#templates.<template>'
+```
+
+where `<template>` is one of the templates available in the nix flake.
+At the time of writing, the list is `base`, `clojure`,`react`,`react-native`, `python`, and `hcl`.
+If you don't specify the template, it'll default to the default template, which is the base template.
+
+## How to Use (if you fork this and make it private)
+
+If you want to fork this repo and make it private (in order to add custom modules to it or your own custom logic),
+you'll need to consume it with a personal access token, or nix will be grumpy that you're wanting it to clone a private repo.
+
+To consume this as a private repo, you'll need to set up a personal access token where nix can read it.
 
 1. Make a PAT in GitHub by going [here](https://github.com/settings/tokens).
 
@@ -81,6 +97,8 @@ Specifying presets in this way allows for defaults specific to that language, fr
 
 - Project name (the repo name in GitHub)
 - src should point to `./.`
+  - It can be set explicitly to `null` in order to avoid copying the repo into the nix store.
+    Do note that nix flakes typically copy the repo into the nix store anyway so there's not much point to setting it to `null` yet.
 - packages: anything else to add to the dev shell
 
 ### Preset
